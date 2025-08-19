@@ -1,4 +1,4 @@
-﻿
-Console.WriteLine("Hello, World!");
+﻿using SalesSystem;
 
-Console.ReadLine();
+Menu menu = new Menu();
+menu.Run();
