@@ -2,10 +2,9 @@ using SalesSystem.Interfaces;
 
 namespace SalesSystem.Models;
 
-public class Customers(int groupSize) {
-	int GroupSize { get; set; } = groupSize;
+public class ShoppingCart {
 	private List<ISalesItem> shoppingCart { get; set; } = [];
-	DateTime date { get; set; } = DateTime.Now;
+	private DateTime date { get; set; }  = DateTime.Now;
 
 	public void AddItem(ISalesItem item) {
 		this.shoppingCart.Add(item);
