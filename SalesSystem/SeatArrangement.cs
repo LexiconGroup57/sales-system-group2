@@ -35,13 +35,18 @@ public class SeatArrangement
           }
      }
 
-     // RETURNS A SEAT TO TICKET FOR MOVIE (IN INSTANCED SeatArrangement)
+     // +-----------------------------------+
+     // |        SEAT RESERVATION           |
+     // | [GREEN] = Avail. [RED] = Reserved |
+     // |                                   |
+     // |  Returns selected seat number     |
+     // |  for ticket assignment            |
+     // +-----------------------------------+
      public int checkAndFillSeat()
      {
           Console.WriteLine("See available seats below (marked with 0)");
           Console.WriteLine(); // create space
-          PrintSeatArrayColored();
-          //printSeatArray(); // print state of seats
+          PrintSeatArrayColored(); // PRINTS CURRENT STATE OF MOVIE'S SEAT ARRAY
           Console.WriteLine(); // create space
 
           Console.Write("Enter the requested seat: ");
@@ -56,11 +61,11 @@ public class SeatArrangement
                if(seatAvailability == true)
                {
                     // Mark the seat as taken (1)
-                    Seats[checkSeat] = 1;
+                    Seats[checkSeat-1] = 1;
                     Console.WriteLine($"Seat {checkSeat} has now been reserved.");
                     return checkSeat;
                }
-               else
+               else // restarts sequence after confirming if it's false
                {
                     Console.WriteLine("Click any button to check another seat.");
                     Console.ReadLine();
@@ -75,7 +80,7 @@ public class SeatArrangement
      }
 
      // IS THE SEAT AVAILABLE? 0 = available, 1 = filled.
-     // Feels like this could use more for security. Like some exception handling perhaps. Will check.
+     // The fallback is handled inside of the checkAndFillSeat method
      public bool isSeatAvailable(int seatNumber)
      {
           // Check if seat number is valid (within array bounds)
