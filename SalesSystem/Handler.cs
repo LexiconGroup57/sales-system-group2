@@ -5,6 +5,7 @@ namespace SalesSystem
     public static class Handler
     {
         private static SeatArrangement seatArrangement = new();
+        private static Accounting accounting = new();
         public static void Load()
         {
             // load movie data from file
@@ -26,6 +27,12 @@ namespace SalesSystem
                 Console.ReadLine();
             }
             
+        }
+        public static void ShowMonthlyReport()
+        {
+            Console.Clear();
+            accounting.ShowMonthlyReport();
+            Console.ReadLine();
         }
     }
 }
