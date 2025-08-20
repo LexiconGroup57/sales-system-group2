@@ -6,12 +6,6 @@ namespace SalesSystem
     {
         private static SeatArrangement seatArrangement = new();
         private static Accounting accounting = new();
-        public static void Load()
-        {
-            // load movie data from file
-        }
-
-
         public static void MakeOrder()
         {
             Console.Clear();
