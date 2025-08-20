@@ -91,14 +91,18 @@ public class SeatArrangement
           }
           
           // Check if seat is available (value is 0)
-          if(Seats[seatNumber] == 0)
+          if(Seats[seatNumber - 1] == 0)
           {
                Console.WriteLine("This seat is available.");
                return true;
           }
-          else
+          else if(Seats[seatNumber] == 1)
           {
                Console.WriteLine("This seat is not available.");
+               return false;
+          }
+          else
+          {
                return false;
           }
      }
@@ -109,6 +113,7 @@ public class SeatArrangement
           // Runs the loop until we've run through the number of rows the cinema room has.
           for (int row = 0; row < DisplayRows; row++)
           {
+               Console.WriteLine();
                // Runs through the loop for the number of columns we have.
                for (int col = 0; col < DisplayColumns; col++)
                {
@@ -137,7 +142,6 @@ public class SeatArrangement
                     // Reset for safety so next writes (like newlines) aren’t colored
                     Console.ResetColor();
                }
-               Console.WriteLine();
           }
      }
 }
