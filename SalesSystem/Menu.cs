@@ -4,13 +4,24 @@ namespace SalesSystem
 {
     public class Menu
     {
+        private bool Running = true;
         public void Run()
         {
-            while (true)
+            while (Running)
             {
-                Console.WriteLine("Enter 'q' to quit");
-                if (Console.ReadLine() == "q")
-                    break;
+                Console.WriteLine("Options:");
+                Console.WriteLine("1: Make order");
+                Console.WriteLine("q: Quit");
+                switch (Console.ReadLine() ?? "")
+                {
+                    case "q":
+                        Running = false;
+                        break;
+                    case "1":
+                        Handler.MakeOrder();
+                        break;
+                }
+                Console.Clear();
             }
         }
     }
