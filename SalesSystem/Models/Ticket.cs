@@ -8,6 +8,6 @@ public class Ticket(string name, string? description, double basePrice, double v
 	public string Description { get; set; } = description ?? string.Empty;
 	public double BasePrice { get; set; } = basePrice;
 	public double Vat { get; set; } = vat;
-	public double VatPrice { get; set; } = Math.Round(basePrice * (1 + vat / 100));
+	public double VatPrice { get; set; } = Math.Round(basePrice * (1 + vat));
 	public Movie Movie { get; set; } = movie;
 }

@@ -9,9 +9,10 @@ public class CustomerGroup {
 	private readonly List<Customer> customers = [];
 	private readonly ShoppingCart shoppingCart = new ShoppingCart();
 
-	// private Dictionary<string, Snack> snackList = new Dictionary<string, Snack>()
-	// 	{"cars", new Snack("Ahlgrens bilar")}
-	// 	;
+	private readonly Dictionary<string, Snack> snackList = new Dictionary<string, Snack> {
+		["cars"] = new Snack("Ahlgrens bilar", "125 g", 19.64, 0.12),
+		["popcorn"] = new Snack("Popcorn and Coca-Cola", "", 38.39, 0.12)
+	};
 
 	public CustomerGroup(int groupSize) {
 		this.AddCustomers(groupSize);
@@ -28,11 +29,11 @@ public class CustomerGroup {
 		};
 	}
 
-	public void AddShoppingCartItem(string salesItem, Movie movie, int? amount) {
+	public void AddShoppingCartItem(string salesItem, Movie movie, int? amount, string? item) {
 		if (salesItem.Equals("ticket", StringComparison.CurrentCultureIgnoreCase)) {
 			this.AddTicket(movie);
 		} else if (salesItem.Equals("snack", StringComparison.CurrentCultureIgnoreCase)) {
-			this.AddSnack(amount ?? 1);
+			this.AddSnack(amount ?? 1, item ?? string.Empty);
 		}
 	}
 
@@ -59,9 +60,9 @@ public class CustomerGroup {
 		}
 	}
 
-	private void AddSnack(int amount) {
+	private void AddSnack(int amount, string item) {
 		for (int i = 0; i < amount; i++) {
-			// shoppingCart.salesItems.Add(new Snack())
+			shoppingCart.salesItems.Add(snackList[item]);
 		}
 	}
 
