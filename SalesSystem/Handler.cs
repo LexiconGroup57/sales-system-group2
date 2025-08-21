@@ -1,5 +1,6 @@
 ﻿using System;
 using SalesSystem.Models;
+using SalesSystem.Utils;
 
 namespace SalesSystem
 {
@@ -42,24 +43,45 @@ namespace SalesSystem
 
             // Customer group creation
             Console.Clear();
-            CustomerGroup group = new CustomerGroup();
             Console.Write("Enter Customer Count: ");
-            int count = GetNumberFromString(Console.ReadLine());
-            Console.Write("\n");
-            for (int i = 0; i < count; i++)
-            {
-                Console.Write("Enter Person " + (i+1).ToString() + "'s Age: ");
-                group.AddCustomer(new Customer(GetNumberFromString(Console.ReadLine())));
-            }
+            int groupSize = GetNumberFromString(Console.ReadLine());
+            CustomerGroup group = new CustomerGroup(groupSize);
+            group.AddShoppingCartItem("ticket", movie, 0);
 
             // Snack adding
             Console.Clear();
+            Console.Write("Enter Snack Count: ");
+            group.AddShoppingCartItem("snack", movie, GetNumberFromString(Console.ReadLine()));
 
             // Seat selection
-            Console.Clear();
+            int[] chosenSeats = new int[groupSize];
+            for(int i = 0; i < groupSize; i++)
+            {
+                Console.Clear();
+                Console.WriteLine("Choose " + groupSize.ToString() + " Seats. (" + (groupSize - i).ToString() + " left)");
+                chosenSeats[i] = seatArrangement.checkAndFillSeat();
+            }
+            Console.ReadLine();
 
             // Order confirmation
             Console.Clear();
+            Console.WriteLine("Order Confirmation\n");
+            Console.WriteLine("Moive:        " + movie.ToString());
+            string seatoutput = "";
+            for (int i = 0; i < chosenSeats.Length; i++)
+            {
+                seatoutput += chosenSeats[i].ToString();
+                if (i != chosenSeats.Length - 1)
+                    seatoutput += ", ";
+            }
+            Console.WriteLine("Seats:        " + seatoutput);
+            Console.WriteLine("Customers:");
+            List<Customer> customers = group.GetCustomers();
+            for(int i = 0; i < customers.Count; i++)
+            {
+                Console.WriteLine("              " + (i+1).ToString() + ". Age: " + customers[i].Age.ToString());
+            }
+            Console.Write("\nConfirm? (Y/N): ");
 
             Console.ReadLine();
         }
