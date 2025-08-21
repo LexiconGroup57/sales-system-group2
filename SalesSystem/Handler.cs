@@ -46,12 +46,16 @@ namespace SalesSystem
             Console.Write("Enter Customer Count: ");
             int groupSize = GetNumberFromString(Console.ReadLine());
             CustomerGroup group = new CustomerGroup(groupSize);
-            group.AddShoppingCartItem("ticket", movie, 0);
+            group.AddShoppingCartItem("ticket", movie, 0, null);
 
             // Snack adding
             Console.Clear();
-            Console.Write("Enter Snack Count: ");
-            group.AddShoppingCartItem("snack", movie, GetNumberFromString(Console.ReadLine()));
+            Console.Write("Choose snack count (cars): ");
+            int carsCount = GetNumberFromString(Console.ReadLine());
+            Console.Write("Choose snack count (popcorn): ");
+            int popcornCount = GetNumberFromString(Console.ReadLine());
+            group.AddShoppingCartItem("snack", movie, carsCount, "cars");
+            group.AddShoppingCartItem("snack", movie, popcornCount, "popcorn");
 
             // Seat selection
             int[] chosenSeats = new int[groupSize];
