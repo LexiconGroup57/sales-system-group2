@@ -8,6 +8,7 @@ namespace SalesSystem
         private bool Running = true;
         public void Run()
         {
+            Handler.Setup();
             while (Running)
             {
                 Console.WriteLine("Options:");

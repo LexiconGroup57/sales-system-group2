@@ -8,7 +8,15 @@ namespace SalesSystem
     public static class Handler
     {
         private static SeatArrangement seatArrangement = new();
-        private static Accounting accounting = new();
+        private static Accounting[] accounting = new Accounting[12];
+
+        public static void Setup()
+        {
+            for (int i = 0; i < accounting.Length; i++)
+            {
+                accounting[i] = new Accounting();
+            }
+        }
 
         /// <summary>
         /// Turns a string into a number and clamps it to be within the specified range. If it fails it returns inclusiveLower instead.
@@ -107,11 +115,11 @@ namespace SalesSystem
                 ISalesItem item = items[i];
                 if (item is Snack snack)
                 {
-                    accounting.AddSnacksale(PriceCalculation.CalculatePrice(snack.BasePrice, false));
+                    accounting[date.Month - 1].AddSnacksale(PriceCalculation.CalculatePrice(snack.BasePrice, false));
                 }
                 else if (item is Ticket ticket)
                 {
-                    accounting.AddTicketsale(PriceCalculation.CalculatePrice(ticket.BasePrice, discount));
+                    accounting[date.Month - 1].AddTicketsale(PriceCalculation.CalculatePrice(ticket.BasePrice, discount));
                 }
             }
         }
@@ -119,7 +127,9 @@ namespace SalesSystem
         public static void ShowMonthlyReport()
         {
             Console.Clear();
-            accounting.ShowMonthlyReport();
+            Console.Write("Choose month: ");
+            int month = GetNumberFromString(Console.ReadLine(), 1, 12) - 1;
+            accounting[month].ShowMonthlyReport();
             Console.ReadLine();
         }
     }
