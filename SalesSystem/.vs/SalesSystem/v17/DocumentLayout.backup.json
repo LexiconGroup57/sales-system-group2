@@ -1,16 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\D\\source\\repos\\sales-system-group2\\SalesSystem\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{FA228710-E227-5A71-A1FD-FD3BDE4858D2}|SalesSystem.csproj|c:\\users\\d\\source\\repos\\sales-system-group2\\salessystem\\accounting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA228710-E227-5A71-A1FD-FD3BDE4858D2}|SalesSystem.csproj|solutionrelative:accounting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FA228710-E227-5A71-A1FD-FD3BDE4858D2}|SalesSystem.csproj|c:\\users\\d\\source\\repos\\sales-system-group2\\salessystem\\pricecalculation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FA228710-E227-5A71-A1FD-FD3BDE4858D2}|SalesSystem.csproj|solutionrelative:pricecalculation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -18,7 +9,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -27,31 +18,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Pricecalculation.cs",
-              "DocumentMoniker": "C:\\Users\\D\\source\\repos\\sales-system-group2\\SalesSystem\\Pricecalculation.cs",
-              "RelativeDocumentMoniker": "Pricecalculation.cs",
-              "ToolTip": "C:\\Users\\D\\source\\repos\\sales-system-group2\\SalesSystem\\Pricecalculation.cs",
-              "RelativeToolTip": "Pricecalculation.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T11:16:58.185Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Accounting.cs",
-              "DocumentMoniker": "C:\\Users\\D\\source\\repos\\sales-system-group2\\SalesSystem\\Accounting.cs",
-              "RelativeDocumentMoniker": "Accounting.cs",
-              "ToolTip": "C:\\Users\\D\\source\\repos\\sales-system-group2\\SalesSystem\\Accounting.cs",
-              "RelativeToolTip": "Accounting.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-19T10:42:20.99Z",
-              "EditorCaption": ""
             }
           ]
         }
