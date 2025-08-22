@@ -5,6 +5,7 @@
 /.vs
 /SalesSystem/obj/*
 /SalesSystem/bin/*
+/SalesSystem/.vs/*
 /SalesSystem/.vs/SalesSystem
 /SalesSystem/.vs/SalesSystem/copilot-chat/de909078/sessions
 /SalesSystem/.vs/SalesSystem/copilot-chat/de909078/sessions/2fb4cc73-7869-44a3-a731-d5e4c98743b1
