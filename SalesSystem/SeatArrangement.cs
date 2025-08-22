@@ -55,7 +55,7 @@ public class SeatArrangement
         if (int.TryParse(Console.ReadLine(), out checkSeat))
         {
             // Continue with the valid input
-            bool seatAvailability = isSeatAvailable(checkSeat);
+            bool seatAvailability = IsSeatAvailable(checkSeat);
 
 
             if (seatAvailability == true)

@@ -64,7 +64,7 @@ namespace SalesSystem
             {
                 Console.Clear();
                 Console.WriteLine("Choose " + groupSize.ToString() + " Seats. (" + (groupSize - i).ToString() + " left)");
-                chosenSeats[i] = seatArrangement.checkAndFillSeat();
+                chosenSeats[i] = seatArrangement.CheckAndFillSeat();
             }
             Console.ReadLine();
 
@@ -91,11 +91,9 @@ namespace SalesSystem
             if (input == "Y")
             {
                 ConfirmOrder(group);
+                return;
             }
-            else if (input == "N")
-            {
-
-            }
+            seatArrangement.UnreserveSeats(chosenSeats);
         }
         private static void ConfirmOrder(CustomerGroup group)
         {
