@@ -1,6 +1,7 @@
 ﻿using System;
 using SalesSystem.Models;
 using SalesSystem.Utils;
+using SalesSystem.Interfaces;
 
 namespace SalesSystem
 {
@@ -89,15 +90,34 @@ namespace SalesSystem
             string input = Console.ReadLine();
             if (input == "Y")
             {
-
+                ConfirmOrder(group);
             }
             else if (input == "N")
             {
 
             }
-
-            Console.ReadLine();
         }
+        private static void ConfirmOrder(CustomerGroup group)
+        {
+            ShoppingCart cart = group.GetShoppingCart();
+            DateTime date = cart.date;
+            bool discount = (date.Month == 10);
+
+            ISalesItem[] items = cart.salesItems.ToArray();
+            for(int i = 0; i < items.Length; i++)
+            {
+                ISalesItem item = items[i];
+                if (item is Snack snack)
+                {
+                    accounting.AddSnacksale(PriceCalculation.CalculatePrice(snack.BasePrice, false));
+                }
+                else if (item is Ticket ticket)
+                {
+                    accounting.AddTicketsale(PriceCalculation.CalculatePrice(ticket.BasePrice, discount));
+                }
+            }
+        }
+
         public static void ShowMonthlyReport()
         {
             Console.Clear();
