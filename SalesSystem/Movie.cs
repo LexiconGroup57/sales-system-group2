@@ -12,7 +12,7 @@ namespace SalesSystem
 
         public override string ToString() => $"{Title} ({Rating}, {DurationMinutes} min)";
 
-        public static List<Movie> GetAllMovies()
+        public static List<Movie> GetAllMovies() //This static method returns a list of all movies available//
         {
             return new List<Movie>
             {

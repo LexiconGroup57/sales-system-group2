@@ -1,13 +1,26 @@
-Console.writeLine("Price Calculation discount");
+namespace 
+SalesSystem;
+using System;
 
-Console.writeLine("Enter the price of the product:");
-decimal price = Convert.ToDecimal(Console.ReadLine());
-Console.writeLine("Enter the discount percentage:");
-decimal discountPercentage = Convert.ToDecimal(Console.ReadLine());
-decimal discountAmount = (discountPercentage / 100) * price;
-decimal finalPrice = price - discountAmount;
-Console.writeLine($"The final price after a discount of {discountPercentage}% is: {finalPrice:C}");
-Console.writeLine("Thank you for using the Price Calculation system.");
+public class PriceCalculation
+    
+{
+    public static double CalculatePrice(double price, bool discount)
+
+    {
+    
+        double discountPercentage = 0;
+        if (discount)
+            discountPercentage = 0.5; 
+     
+
+
+
+        double discountAmount = discountPercentage * price;
+        return price - discountAmount;
+    }
+}
+
 
 
 

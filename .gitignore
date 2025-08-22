@@ -5,6 +5,7 @@
 /.vs
 /SalesSystem/obj/*
 /SalesSystem/bin/*
+/SalesSystem/.vs/*
 /SalesSystem/.vs/SalesSystem
 /SalesSystem/.vs/SalesSystem/copilot-chat/de909078/sessions
 /SalesSystem/.vs/SalesSystem/copilot-chat/de909078/sessions/2fb4cc73-7869-44a3-a731-d5e4c98743b1
@@ -25,3 +26,8 @@
 /SalesSystem/.vs/SalesSystem/v17/DocumentLayout.backup.json
 /SalesSystem/.vs/SalesSystem/v17/DocumentLayout.json
 *.user
+/SalesSystem/.vs/ProjectEvaluation
+/SalesSystem/.vs/SalesSystem/DesignTimeBuild/.dtbcache.v2
+/SalesSystem/.vs/SalesSystem/v17/.suo
+/SalesSystem/.vs/SalesSystem/v17/DocumentLayout.json
+SalesSystem/.vs/
