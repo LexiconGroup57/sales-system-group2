@@ -86,6 +86,15 @@ namespace SalesSystem
                 Console.WriteLine("              " + (i+1).ToString() + ". Age: " + customers[i].Age.ToString());
             }
             Console.Write("\nConfirm? (Y/N): ");
+            string input = Console.ReadLine();
+            if (input == "Y")
+            {
+
+            }
+            else if (input == "N")
+            {
+
+            }
 
             Console.ReadLine();
         }
