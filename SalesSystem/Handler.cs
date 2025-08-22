@@ -88,7 +88,7 @@ namespace SalesSystem
             }
             Console.Write("\nConfirm? (Y/N): ");
             string input = Console.ReadLine();
-            if (input == "Y")
+            if (input.ToLower() == "y")
             {
                 ConfirmOrder(group);
                 return;
