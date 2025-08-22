@@ -42,7 +42,7 @@ public class SeatArrangement
      // |  Returns selected seat number     |
      // |  for ticket assignment            |
      // +-----------------------------------+
-     public int checkAndFillSeat()
+     public int CheckAndFillSeat()
      {
           Console.WriteLine("See available seats below (marked with 0)");
           Console.WriteLine(); // create space
@@ -61,7 +61,7 @@ public class SeatArrangement
                if(seatAvailability == true)
                {
                     // Mark the seat as taken (1)
-                    Seats[checkSeat-1] = 1;
+                    Seats[checkSeat - 1] = 1;
                     Console.WriteLine($"Seat {checkSeat} has now been reserved.");
                     return checkSeat;
                }
@@ -69,19 +69,68 @@ public class SeatArrangement
                {
                     Console.WriteLine("Click any button to check another seat.");
                     Console.ReadLine();
-                    return checkAndFillSeat();
+                    return CheckAndFillSeat();
                }
           }
           else 
           {
                Console.WriteLine("Invalid input. Please enter a number.");
-               return checkAndFillSeat();
+               return CheckAndFillSeat();
+          }
+     }
+
+     public void UnreserveSeats()
+     {
+          int seatCount = 0;
+          Console.WriteLine("Enter the number of seats you wish to unreserve or type 'q' and click Enter to exit back to the Menu.");
+          Console.WriteLine();
+          Console.Write("How many seats to unreserve: ");
+          if(int.TryParse(Console.ReadLine(), out seatCount))
+          {
+               Console.WriteLine($"You have entered this many seats to unreserve: {seatCount}");
+               for(int i = 0; i < seatCount; i++)
+               {
+                    int seatToRemove = 0;
+                    Console.WriteLine();
+                    Console.WriteLine("Press 'q' and then enter to quit or");
+                    Console.Write("Enter seat to unreserve: ");
+                    string userInput = Console.ReadLine();
+                    if(int.TryParse(userInput, out seatToRemove) && Seats[seatToRemove - 1] == 1 && seatToRemove <= Seats.Length && seatToRemove > 0)
+                    {
+                         Seats[seatToRemove - 1] = 0;
+                         Console.WriteLine($"Seat {seatToRemove} has been unreserved.");
+                    }
+                    else if (Seats[seatToRemove - 1] == 0 && userInput != "q")
+                    {
+                         i--;
+                         Console.WriteLine($"That seat is already available so it can't be unreserved.");
+                         Console.ReadLine();
+                    }
+                    else if (userInput == "q")
+                    {
+                         Console.WriteLine("You are exiting unreserve seats... click any button to return to the Main Menu.");
+                         Console.ReadLine();
+                         break;
+                    }
+                    else
+                    {
+                         Console.WriteLine($"Something went wrong. Click to exit Unreserve Seats and try again.");
+                         Console.ReadLine();
+                         break;
+                    }
+               }
+          }
+          else
+          {
+               Console.WriteLine();
+               Console.WriteLine("You're going back to the Main Menu. Click to continue.");
+               Console.ReadLine();
           }
      }
 
      // IS THE SEAT AVAILABLE? 0 = available, 1 = filled.
      // The fallback is handled inside of the checkAndFillSeat method
-     public bool isSeatAvailable(int seatNumber)
+     public bool IsSeatAvailable(int seatNumber)
      {
           // Check if seat number is valid (within array bounds)
           if(seatNumber < 0 || seatNumber >= Seats.Length)
