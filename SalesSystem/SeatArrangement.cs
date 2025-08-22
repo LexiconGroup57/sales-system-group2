@@ -6,191 +6,176 @@ using System;
 
 public class SeatArrangement
 {
-     // Declares and instances array that cannot be replaced from outside (only the values can)
-     public int[] Seats { get; private set; } = new int[54];
-     
-     // 1 Array below is for displaying seat matrix
-     // 2 Define the dimensions for seat display
-     public int[] DisplaySeats = new int[2];    // 1
-     
-     // Constants for the array, private to make sure they're not altered somehow.
-     private const int DisplayColumns = 9; // 2
-     private const int DisplayRows = 6; // 2
+    // Declares and instances array that cannot be replaced from outside (only the values can)
+    public int[] Seats { get; private set; } = new int[54];
 
-     // Makes a readonly val called TotalSeats based on the total number of slots in the Seats array.
-     public int TotalSeats => Seats.Length;
-     
+    // 1 Array below is for displaying seat matrix
+    // 2 Define the dimensions for seat display
+    public int[] DisplaySeats = new int[2];    // 1
 
-     
-     // BASIC CONSTRUCTOR FOR ARRAY. USEFUL FOR MOVIE CLASS?
-     public SeatArrangement()
-     {
-          // TO MEMBERS: Do you guys need anything else here?
+    // Constants for the array, private to make sure they're not altered somehow.
+    private const int DisplayColumns = 9; // 2
+    private const int DisplayRows = 6; // 2
 
-          //Initialize all seats as available (0)
-          for (int i = 0; i < Seats.Length; i++)
-          {
-               Seats[i] = 0;
-               // How do I print the index number instead of the value?
-          }
-     }
-
-     // +-----------------------------------+
-     // |        SEAT RESERVATION           |
-     // | [GREEN] = Avail. [RED] = Reserved |
-     // |                                   |
-     // |  Returns selected seat number     |
-     // |  for ticket assignment            |
-     // +-----------------------------------+
-     public int CheckAndFillSeat()
-     {
-          Console.WriteLine("See available seats below (marked with 0)");
-          Console.WriteLine(); // create space
-          PrintSeatArrayColored(); // PRINTS CURRENT STATE OF MOVIE'S SEAT ARRAY
-          Console.WriteLine(); // create space
-
-          Console.Write("Enter the requested seat: ");
-          int checkSeat;
-          //Checks if input is valid, otherwise restarts method
-          if(int.TryParse(Console.ReadLine(), out checkSeat))
-          {
-               // Continue with the valid input
-               bool seatAvailability = isSeatAvailable(checkSeat);
-
-               
-               if(seatAvailability == true)
-               {
-                    // Mark the seat as taken (1)
-                    Seats[checkSeat - 1] = 1;
-                    Console.WriteLine($"Seat {checkSeat} has now been reserved.");
-                    return checkSeat;
-               }
-               else // restarts sequence after confirming if it's false
-               {
-                    Console.WriteLine("Click any button to check another seat.");
-                    Console.ReadLine();
-                    return CheckAndFillSeat();
-               }
-          }
-          else 
-          {
-               Console.WriteLine("Invalid input. Please enter a number.");
-               return CheckAndFillSeat();
-          }
-     }
-
-     public void UnreserveSeats()
-     {
-          int seatCount = 0;
-          Console.WriteLine("Enter the number of seats you wish to unreserve or type 'q' and click Enter to exit back to the Menu.");
-          Console.WriteLine();
-          Console.Write("How many seats to unreserve: ");
-          if(int.TryParse(Console.ReadLine(), out seatCount))
-          {
-               Console.WriteLine($"You have entered this many seats to unreserve: {seatCount}");
-               for(int i = 0; i < seatCount; i++)
-               {
-                    int seatToRemove = 0;
-                    Console.WriteLine();
-                    Console.WriteLine("Press 'q' and then enter to quit or");
-                    Console.Write("Enter seat to unreserve: ");
-                    string userInput = Console.ReadLine();
-                    if(int.TryParse(userInput, out seatToRemove) && Seats[seatToRemove - 1] == 1 && seatToRemove <= Seats.Length && seatToRemove > 0)
-                    {
-                         Seats[seatToRemove - 1] = 0;
-                         Console.WriteLine($"Seat {seatToRemove} has been unreserved.");
-                    }
-                    else if (Seats[seatToRemove - 1] == 0 && userInput != "q")
-                    {
-                         i--;
-                         Console.WriteLine($"That seat is already available so it can't be unreserved.");
-                         Console.ReadLine();
-                    }
-                    else if (userInput == "q")
-                    {
-                         Console.WriteLine("You are exiting unreserve seats... click any button to return to the Main Menu.");
-                         Console.ReadLine();
-                         break;
-                    }
-                    else
-                    {
-                         Console.WriteLine($"Something went wrong. Click to exit Unreserve Seats and try again.");
-                         Console.ReadLine();
-                         break;
-                    }
-               }
-          }
-          else
-          {
-               Console.WriteLine();
-               Console.WriteLine("You're going back to the Main Menu. Click to continue.");
-               Console.ReadLine();
-          }
-     }
-
-     // IS THE SEAT AVAILABLE? 0 = available, 1 = filled.
-     // The fallback is handled inside of the checkAndFillSeat method
-     public bool IsSeatAvailable(int seatNumber)
-     {
-          // Check if seat number is valid (within array bounds)
-          if(seatNumber < 0 || seatNumber >= Seats.Length)
-          {
-               Console.WriteLine("Invalid seat number. Please choose between 0 and " + (Seats.Length - 1));
-               return false;
-          }
-          
-          // Check if seat is available (value is 0)
-          if(Seats[seatNumber - 1] == 0)
-          {
-               Console.WriteLine("This seat is available.");
-               return true;
-          }
-          else if(Seats[seatNumber] == 1)
-          {
-               Console.WriteLine("This seat is not available.");
-               return false;
-          }
-          else
-          {
-               return false;
-          }
-     }
+    // Makes a readonly val called TotalSeats based on the total number of slots in the Seats array.
+    public int TotalSeats => Seats.Length;
 
 
-     public void PrintSeatArrayColored()
-     {
-          // Runs the loop until we've run through the number of rows the cinema room has.
-          for (int row = 0; row < DisplayRows; row++)
-          {
-               Console.WriteLine();
-               // Runs through the loop for the number of columns we have.
-               for (int col = 0; col < DisplayColumns; col++)
-               {
-                    // Correctly assigns the value we want to print to the seating.
-                    // If row=1 and the column=2, then 1*9+2=11 (the second column on the second row)
-                    int index = row * DisplayColumns + col;
-                    int value = Seats[index]; // 0 empty, 1 occupied, etc.
 
-                    // Choose colors. This will globally enforce these color values to the printout this loop.
-                    // At the end of this for-run we clear it with Console.ResetColor(); and run the loop again.
-                    if (value == 0)
-                    {
-                         Console.BackgroundColor = ConsoleColor.DarkGreen;  // empty
-                         Console.ForegroundColor = ConsoleColor.Black; // Text counts as foreground
-                    }
-                    else
-                    {
-                         Console.BackgroundColor = ConsoleColor.DarkRed;    // occupied
-                         Console.ForegroundColor = ConsoleColor.White; // Text counts as foreground
-                    }
+    // BASIC CONSTRUCTOR FOR ARRAY. USEFUL FOR MOVIE CLASS?
+    public SeatArrangement()
+    {
+        // TO MEMBERS: Do you guys need anything else here?
 
-                    // Write a fixed-width “cell”. The fixed width comes from the "alignment" value 2 within {}.
-                    // Basically. ($" expression, alignment} ")
-                    Console.Write($" {index + 1,2} ");
+        //Initialize all seats as available (0)
+        for (int i = 0; i < Seats.Length; i++)
+        {
+            Seats[i] = 0;
+            // How do I print the index number instead of the value?
+        }
+    }
 
-                    // Reset for safety so next writes (like newlines) aren’t colored
-                    Console.ResetColor();
-               }
-          }
-     }
+    // +-----------------------------------+
+    // |        SEAT RESERVATION           |
+    // | [GREEN] = Avail. [RED] = Reserved |
+    // |                                   |
+    // |  Returns selected seat number     |
+    // |  for ticket assignment            |
+    // +-----------------------------------+
+    public int CheckAndFillSeat()
+    {
+        Console.WriteLine("See available seats below (marked with 0)");
+        Console.WriteLine(); // create space
+        PrintSeatArrayColored(); // PRINTS CURRENT STATE OF MOVIE'S SEAT ARRAY
+        Console.WriteLine(); // create space
+
+        Console.Write("Enter the requested seat: ");
+        int checkSeat;
+        //Checks if input is valid, otherwise restarts method
+        if (int.TryParse(Console.ReadLine(), out checkSeat))
+        {
+            // Continue with the valid input
+            bool seatAvailability = isSeatAvailable(checkSeat);
+
+
+            if (seatAvailability == true)
+            {
+                // Mark the seat as taken (1)
+                Seats[checkSeat - 1] = 1;
+                Console.WriteLine($"Seat {checkSeat} has now been reserved.");
+                return checkSeat;
+            }
+            else // restarts sequence after confirming if it's false
+            {
+                Console.WriteLine("Click any button to check another seat.");
+                Console.ReadLine();
+                return CheckAndFillSeat();
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid input. Please enter a number.");
+            return CheckAndFillSeat();
+        }
+    }
+
+    public void UnreserveSeats(int[] seatsToRemove)
+    {
+        if (seatsToRemove.Length > 54)
+        {
+            Console.WriteLine("The locale doesn't have that many seats. Click any button to exit...");
+            Console.ReadLine();
+        }
+        else if (seatsToRemove.Length <= 54 && seatsToRemove.Length > 0)
+        {
+            for (int i = 0; i < seatsToRemove.Length; i++)
+            {
+                int seatNumber = seatsToRemove[i];
+
+                // Checks so that seat number isn't too small or big
+                if (seatNumber < 1 || seatNumber > 54)
+                {
+                    Console.WriteLine($"Seat {seatNumber} is invalid. Must be between 1 and 54.");
+                    continue;
+                }
+
+                // Check array index (seatNumber-1 because array starts at 0)
+                if (Seats[seatNumber - 1] == 1)
+                {
+                    Seats[seatNumber - 1] = 0;
+                    Console.WriteLine($"Seat {seatNumber} has been unreserved.");
+                }
+                else if (Seats[seatNumber - 1] == 0)
+                {
+                    Console.WriteLine($"Seat {seatNumber} is already unreserved.");
+                }
+            }
+        }
+    }
+
+    // IS THE SEAT AVAILABLE? 0 = available, 1 = filled.
+    // The fallback is handled inside of the checkAndFillSeat method
+    public bool IsSeatAvailable(int seatNumber)
+    {
+        // Check if seat number is valid (within array bounds)
+        if (seatNumber < 0 || seatNumber >= Seats.Length)
+        {
+            Console.WriteLine("Invalid seat number. Please choose between 0 and " + (Seats.Length - 1));
+            return false;
+        }
+
+        // Check if seat is available (value is 0)
+        if (Seats[seatNumber - 1] == 0)
+        {
+            Console.WriteLine("This seat is available.");
+            return true;
+        }
+        else if (Seats[seatNumber] == 1)
+        {
+            Console.WriteLine("This seat is not available.");
+            return false;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    public void PrintSeatArrayColored()
+    {
+        // Runs the loop until we've run through the number of rows the cinema room has.
+        for (int row = 0; row < DisplayRows; row++)
+        {
+            Console.WriteLine();
+            // Runs through the loop for the number of columns we have.
+            for (int col = 0; col < DisplayColumns; col++)
+            {
+                // Correctly assigns the value we want to print to the seating.
+                // If row=1 and the column=2, then 1*9+2=11 (the second column on the second row)
+                int index = row * DisplayColumns + col;
+                int value = Seats[index]; // 0 empty, 1 occupied, etc.
+
+                // Choose colors. This will globally enforce these color values to the printout this loop.
+                // At the end of this for-run we clear it with Console.ResetColor(); and run the loop again.
+                if (value == 0)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGreen;  // empty
+                    Console.ForegroundColor = ConsoleColor.Black; // Text counts as foreground
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkRed;    // occupied
+                    Console.ForegroundColor = ConsoleColor.White; // Text counts as foreground
+                }
+
+                // Write a fixed-width “cell”. The fixed width comes from the "alignment" value 2 within {}.
+                // Basically. ($" expression, alignment} ")
+                Console.Write($" {index + 1,2} ");
+
+                // Reset for safety so next writes (like newlines) aren’t colored
+                Console.ResetColor();
+            }
+        }
+    }
 }
